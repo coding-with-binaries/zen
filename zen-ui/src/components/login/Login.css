@@ -1,0 +1,69 @@
+.zen-login {
+  height: 100vh;
+  width: 100vw;
+  background: url('/assets/images/zen-app-background.jpg');
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+}
+
+.zen-login .left-panel {
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zen-logo {
+  height: 150px;
+}
+
+.zen-login .right-panel {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #43a048bf;
+}
+
+.zen-login .login-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.login-form .login-form-title {
+  color: #fffadf;
+  font-size: 1.75rem;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.login-form input[type='email'],
+.login-form input[type='password'] {
+  width: 372px;
+  margin: 8px 0;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.login-form ::placeholder {
+  color: darkslategrey;
+}
+
+.login-form .submit {
+  cursor: pointer;
+  background-color: #fffadf;
+  color: #668956;
+  font-size: 14px;
+  font-weight: bold;
+  width: 400px;
+  margin: 8px 0;
+  padding: 12px;
+}
+
+.login-form .submit:hover {
+  background-color: #e7dfb1;
+}
