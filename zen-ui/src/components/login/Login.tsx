@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import './Login.css';
 
 interface LoginData {
   email: string;
   password: string;
 }
-const Login: React.FC = () => {
+
+type Props = RouteComponentProps;
+
+const Login: React.FC<Props> = props => {
+  const { history } = props;
   const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: ''
@@ -18,6 +23,8 @@ const Login: React.FC = () => {
       [e.target.name]: e.target.value
     }));
   };
+
+  const login = () => history.push('/home');
 
   return (
     <div className="zen-login">
@@ -45,7 +52,7 @@ const Login: React.FC = () => {
             value={loginData.password}
             onChange={onFormChange}
           />
-          <button className="submit" type="submit">
+          <button className="submit" type="submit" onClick={login}>
             Submit
           </button>
         </div>
@@ -54,4 +61,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

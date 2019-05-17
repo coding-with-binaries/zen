@@ -1,8 +1,7 @@
 import React from 'react';
-import Login from './components/login';
+import { Route } from 'react-router-dom';
+import Main from './components/Main';
 
-const App: React.FC = () => {
-  return <Login />;
-};
+const App: React.FC = () => <Route path="/" component={Main} />;
 
 export default App;

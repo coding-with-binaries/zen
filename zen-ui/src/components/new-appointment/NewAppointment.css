@@ -1,0 +1,17 @@
+.zen-new-appointment {
+  padding: 16px;
+}
+
+.zen-search-client input[type='text'] {
+  width: calc(100% - 28px); /* Padding + Border */
+  padding: 12px;
+  font-size: 14px;
+}
+
+.zen-search-client ::placeholder {
+  color: darkslategrey;
+}
+
+.zen-clients-result {
+  margin-top: 20px;
+}

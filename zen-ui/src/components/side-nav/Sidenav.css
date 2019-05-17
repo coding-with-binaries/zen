@@ -1,0 +1,39 @@
+.zen-sidenav {
+  background-color: #43a047;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.zen-sidenav-item {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: unset;
+  color: honeydew;
+  cursor: pointer;
+}
+
+.zen-sidenav-item:hover {
+  color: #fffadf;
+}
+
+.zen-sidenav-item:not(:last-child) {
+  border-bottom: 1px solid honeydew;
+}
+
+.zen-sidenav-item .title {
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.zen-sidenav-item:hover .title,
+.zen-sidenav-item.active .title {
+  font-size: 14px;
+  font-weight: bolder;
+}

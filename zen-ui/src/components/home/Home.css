@@ -1,0 +1,29 @@
+.zen-home {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 100px min-content auto;
+  grid-template-rows: 1fr;
+}
+
+.zen-nav-drawer {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 60px auto;
+}
+
+.nav-drawer-header {
+  background-color: #39983d;
+  display: flex;
+  align-items: center;
+  color: honeydew;
+}
+
+.nav-drawer-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 16px;
+}
