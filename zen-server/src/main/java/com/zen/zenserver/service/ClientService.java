@@ -30,4 +30,7 @@ public class ClientService {
 		clientRepository.save(client);
 	}
 
+	public List<Client> searchClients(String pattern) {
+		return clientRepository.searchClients(pattern);
+	}
 }

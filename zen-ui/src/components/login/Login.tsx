@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import * as Yup from 'yup';
 import './Login.css';
-
-interface LoginData {
-  email: string;
-  password: string;
-}
 
 type Props = RouteComponentProps;
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Please enter a valid email')
+    .required('Email is required'),
+  password: Yup.string().required('Password is required')
+});
+
 const Login: React.FC<Props> = props => {
   const { history } = props;
-  const [loginData, setLoginData] = useState<LoginData>({
+  const initialLogin = {
     email: '',
     password: ''
-  });
-
-  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.persist();
-    setLoginData(prevLoginData => ({
-      ...prevLoginData,
-      [e.target.name]: e.target.value
-    }));
   };
 
-  const login = () => history.push('/home');
+  const login = (values: FormikValues) => {
+    history.push('/home');
+  };
 
   return (
     <div className="zen-login">
@@ -36,26 +34,40 @@ const Login: React.FC<Props> = props => {
         />
       </div>
       <div className="right-panel">
-        <div className="login-form">
-          <div className="login-form-title">Login</div>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={loginData.email}
-            onChange={onFormChange}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={loginData.password}
-            onChange={onFormChange}
-          />
-          <button className="submit" type="submit" onClick={login}>
-            Submit
-          </button>
-        </div>
+        <Formik
+          initialValues={initialLogin}
+          validationSchema={validationSchema}
+          onSubmit={login}
+        >
+          {({ isValid, errors, touched }) => (
+            <Form className="login-form">
+              <div className="login-form-title">Login</div>
+              <Field
+                className={errors.email && touched.email ? 'has-error' : ''}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <span className="login-field-error">
+                <ErrorMessage name="email" />
+              </span>
+              <Field
+                className={
+                  errors.password && touched.password ? 'has-error' : ''
+                }
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              <span className="login-field-error">
+                <ErrorMessage name="password" />
+              </span>
+              <button className="submit" type="submit" disabled={!isValid}>
+                Submit
+              </button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

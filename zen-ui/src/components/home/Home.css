@@ -16,7 +16,9 @@
   background-color: #39983d;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: honeydew;
+  padding: 0 16px;
 }
 
 .nav-drawer-title {
@@ -25,5 +27,4 @@
   text-transform: uppercase;
   font-size: 14px;
   font-weight: bold;
-  margin-left: 16px;
 }

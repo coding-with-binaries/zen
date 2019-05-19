@@ -1,7 +1,7 @@
 .zen-client {
   height: 60px;
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr 1fr;
   padding: 8px;
   cursor: pointer;
   border-bottom: 1px solid #c1dbc1;
@@ -11,40 +11,39 @@
   background-color: #beeebe;
 }
 
-.zen-client-data {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-}
-
-.zen-client-data .primary {
+.zen-client .primary {
+  grid-row: 1 / 2;
   display: grid;
   grid-template-columns: 3fr 1fr 2fr;
+  align-self: center;
 }
 
-.zen-client-data .secondary {
+.zen-client .secondary {
+  grid-row: 2 / 3;
   display: grid;
   grid-template-columns: 1fr 2fr;
-}
-
-.zen-client .id {
-  font-size: 14px;
-  font-weight: 500;
-  justify-self: center;
+  align-self: center;
 }
 
 .zen-client .name {
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
-  font-weight: 500;
 }
 
 .zen-client .gender,
 .zen-client .dob {
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 13px;
   text-align: left;
+  text-transform: capitalize;
 }
 
 .zen-client .phone,
 .zen-client .email {
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 12px;
   font-style: italic;
   text-align: right;

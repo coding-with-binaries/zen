@@ -1,0 +1,36 @@
+svg.zen-spinner {
+  width: 3.75em;
+  animation: 1.5s spin ease infinite;
+}
+
+.zen-spinner.sm {
+  height: 32px;
+  width: 32px;
+}
+
+.zen-spinner.md {
+  height: 48px;
+  width: 48px;
+}
+
+.zen-spinner.lg {
+  height: 64px;
+  width: 64px;
+}
+
+.spinner-ring {
+  fill: none;
+  stroke: #8fd292b5;
+  stroke-width: 2;
+}
+
+.spinner-ball {
+  fill: honeydew;
+  stroke: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

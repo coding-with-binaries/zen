@@ -8,6 +8,13 @@
   font-size: 14px;
 }
 
+.zen-search-client input:focus {
+  background-color: #fff;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #007bff40;
+}
+
 .zen-search-client ::placeholder {
   color: darkslategrey;
 }

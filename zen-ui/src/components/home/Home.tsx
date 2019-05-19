@@ -6,6 +6,7 @@ import { StoreState } from '../../types';
 import ClientList from '../client-list';
 import NavDrawer from '../nav-drawer';
 import NewAppointment from '../new-appointment';
+import NewClient from '../new-client';
 import Sidenav from '../side-nav';
 import './Home.css';
 
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
         {navDrawer && (
           <>
             <Route path={routes.newAppointment} component={NewAppointment} />
+            <Route path={routes.newClient} component={NewClient} />
             <Route path={routes.clientList} component={ClientList} />
           </>
         )}
