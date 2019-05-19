@@ -18,7 +18,9 @@ const validationSchema = Yup.object().shape({
   gender: Yup.string()
     .oneOf(['male', 'female'])
     .required('Gender is required'),
-  phoneNumber: Yup.number().required('Phone Number is required')
+  phoneNumber: Yup.number()
+    .typeError('Phone number should be a number')
+    .required('Phone Number is required')
 });
 
 const NewClient: React.FC = () => {

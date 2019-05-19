@@ -44,7 +44,7 @@ public class ClientController {
 		return client;
 	}
 
-	@RequestMapping(value = "/{search}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{pattern}", method = RequestMethod.GET)
 	public @ResponseBody List<Client> searchClients(@PathVariable String pattern) {
 		return clientService.searchClients(pattern);
 	}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { searchClient } from '../../api/Client';
 import { Client } from '../../types/Client';
 import Clients from '../common/clients';
 import './NewAppointment.css';
@@ -15,26 +16,9 @@ const NewAppointment: React.FC = () => {
 
   useEffect(() => {
     if (pattern !== '') {
-      setClients([
-        {
-          clientId: 1,
-          email: 'coding.with.binaries@gmail.com',
-          dateOfBirth: '1995-09-06',
-          firstName: 'Varun',
-          gender: 'Male',
-          lastName: 'Sharma',
-          phoneNumber: '9686991295'
-        },
-        {
-          clientId: 2,
-          email: 'apoorvamishra211@gmail.com',
-          dateOfBirth: '1994-12-04',
-          firstName: 'Apoorva',
-          gender: 'Female',
-          lastName: 'Sharma',
-          phoneNumber: '7087242143'
-        }
-      ]);
+      searchClient(pattern).then(res => {
+        setClients(res);
+      });
     }
   }, [pattern]);
 
@@ -53,7 +37,7 @@ const NewAppointment: React.FC = () => {
           />
         </div>
         <div className="zen-clients-result">
-          <Clients clients={clients} />
+          {pattern !== '' && <Clients clients={clients} />}
         </div>
       </div>
     </div>

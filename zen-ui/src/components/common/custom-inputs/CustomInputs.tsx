@@ -56,6 +56,7 @@ export const ZenRadioGroup: React.FC<RadioProps> = ({
             type="radio"
             id={option.id}
             defaultChecked={form.values[field.name] === option.value}
+            {...field}
             name={field.name}
             value={option.value}
           />

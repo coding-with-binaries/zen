@@ -3,6 +3,8 @@ import { Client } from '../types/Client';
 
 const CLIENTS_URL = `/clients`;
 const GET_CLIENT_URL = (id: number) => `${CLIENTS_URL}/${id}`;
+const SEARCH_CLIENT_URL = (pattern: string) =>
+  `${CLIENTS_URL}/search/${pattern}`;
 
 export const getAllClients = async (): Promise<Client[]> => {
   const response = await axios.get<Client[]>(CLIENTS_URL);
@@ -16,5 +18,10 @@ export const getClient = async (id: number): Promise<Client> => {
 
 export const addClient = async (client: Client): Promise<Client> => {
   const response = await axios.post<Client>(CLIENTS_URL, client);
+  return response.data;
+};
+
+export const searchClient = async (pattern: string): Promise<Client[]> => {
+  const response = await axios.get<Client[]>(SEARCH_CLIENT_URL(pattern));
   return response.data;
 };
