@@ -1,4 +1,4 @@
-package com.zen.zenserver.controllers;
+package com.zen.zenserver.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

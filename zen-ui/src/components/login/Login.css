@@ -23,7 +23,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #d4ffd7bf;
+  background-color: #d4ffd782;
 }
 
 .zen-login .login-form {
@@ -33,9 +33,9 @@
 }
 
 .login-form .login-form-title {
-  color: #105f13;
+  color: #fff;
   font-size: 1.75rem;
-  font-weight: 300;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
@@ -75,9 +75,9 @@
 
 .login-form .submit {
   cursor: pointer;
-  background-color: #fffadf;
+  background-color: #39983d;
   border: none;
-  color: #668956;
+  color: white;
   font-size: 14px;
   font-weight: bold;
   width: 400px;
@@ -86,7 +86,7 @@
 }
 
 .login-form .submit:hover {
-  background-color: #e7dfb1;
+  background-color: #529e56;
 }
 
 .login-form .submit:disabled {

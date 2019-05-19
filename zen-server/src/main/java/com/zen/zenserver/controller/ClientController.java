@@ -1,4 +1,4 @@
-package com.zen.zenserver.controllers;
+package com.zen.zenserver.controller;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,0 +1,62 @@
+.zen-input-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100px auto;
+  margin-bottom: 12px;
+}
+
+.zen-input-container .zen-input-label {
+  line-height: 1.5;
+  font-size: 14px;
+  font-weight: 100;
+  align-self: center;
+  text-align: center;
+}
+
+input.zen-input {
+  width: calc(100% - 28px); /* Padding + Border */
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #d0d0d0;
+}
+
+input.zen-input.has-error {
+  border: 1px solid #dc3545;
+}
+
+input.zen-input:focus {
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem #007bff40;
+}
+
+input.zen-input.has-error:focus {
+  background-color: #fff;
+  border-color: #dc3545;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem #dc354540;
+}
+
+.zen-input::placeholder {
+  color: darkslategrey;
+}
+
+.zen-input-wrapper .zen-input-error {
+  font-size: 12px;
+  color: #dc3545;
+}
+
+.zen-radio-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.zen-radio-control {
+  display: flex;
+  align-items: center;
+}
+
+.zen-radio {
+  margin-right: 8px;
+}
