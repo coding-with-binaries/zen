@@ -2,13 +2,21 @@ package com.zen.zenserver.model;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table(name = "client")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Table(name = "clients")
 @Entity
 public class Client {
 	public enum Gender {
@@ -17,7 +25,7 @@ public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int clientId;
+	private int zenId;
 
 	private String firstName;
 
@@ -32,12 +40,16 @@ public class Client {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	public int getClientId() {
-		return clientId;
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
+	private Set<Order> orders;
+
+	public int getZenId() {
+		return zenId;
 	}
 
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
+	public void setZenId(int zenId) {
+		this.zenId = zenId;
 	}
 
 	public String getFirstName() {
@@ -86,5 +98,13 @@ public class Client {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 }

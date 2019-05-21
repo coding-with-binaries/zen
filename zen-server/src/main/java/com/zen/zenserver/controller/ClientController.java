@@ -17,7 +17,7 @@ import com.zen.zenserver.service.ClientService;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "clients")
+@RequestMapping(value = "/api/clients")
 public class ClientController {
 	@Autowired
 	public ClientService clientService;
@@ -27,9 +27,9 @@ public class ClientController {
 		return clientService.getAllClients();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Client> getClient(@PathVariable int id) {
-		return clientService.getClient(id);
+	@RequestMapping(value = "/{zenId}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Client> getClient(@PathVariable int zenId) {
+		return clientService.getClient(zenId);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

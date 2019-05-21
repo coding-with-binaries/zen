@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Client } from '../types/Client';
 
-const CLIENTS_URL = `/clients`;
+const CLIENTS_URL = `/api/clients`;
 const GET_CLIENT_URL = (id: number) => `${CLIENTS_URL}/${id}`;
 const SEARCH_CLIENT_URL = (pattern: string) =>
   `${CLIENTS_URL}/search/${pattern}`;

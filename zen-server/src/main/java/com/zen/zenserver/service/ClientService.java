@@ -18,8 +18,8 @@ public class ClientService {
 		return clientRepository.findAll();
 	}
 
-	public Optional<Client> getClient(int clientId) {
-		return clientRepository.findById(clientId);
+	public Optional<Client> getClient(int zenId) {
+		return clientRepository.findById(zenId);
 	}
 
 	public void addClient(Client client) {

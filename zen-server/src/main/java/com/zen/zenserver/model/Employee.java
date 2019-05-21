@@ -7,12 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int employeeId;
+	private int zenId;
 
 	private String firstName;
 
@@ -22,12 +22,12 @@ public class Employee {
 
 	private String password;
 
-	public int getEmployeeId() {
-		return employeeId;
+	public int getZenId() {
+		return zenId;
 	}
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setZenId(int zenId) {
+		this.zenId = zenId;
 	}
 
 	public String getFirstName() {

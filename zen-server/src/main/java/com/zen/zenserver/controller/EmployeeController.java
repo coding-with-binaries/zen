@@ -12,7 +12,7 @@ import com.zen.zenserver.service.EmployeeService;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "employee")
+@RequestMapping(value = "/api/employee")
 public class EmployeeController {
 
 	@Autowired
@@ -23,7 +23,7 @@ public class EmployeeController {
 		return employeeService.checkLoginCredentials(employee.getEmail(), employee.getPassword());
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public Employee addEmployee(@RequestBody Employee employee) {
 		employeeService.addEmployee(employee);
 		return employee;
