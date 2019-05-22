@@ -7,6 +7,7 @@ import ClientList from '../client-list';
 import NavDrawer from '../nav-drawer';
 import NewAppointment from '../new-appointment';
 import NewClient from '../new-client';
+import Orders from '../orders';
 import Sidenav from '../side-nav';
 import './Home.css';
 
@@ -26,6 +27,7 @@ const Home: React.FC = () => {
           </>
         )}
       </NavDrawer>
+      <Orders />
     </div>
   );
 };

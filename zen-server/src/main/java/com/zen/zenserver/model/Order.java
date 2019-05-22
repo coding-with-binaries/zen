@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Table(name = "orders")
 @Entity
@@ -36,7 +36,7 @@ public class Order {
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderItem> orderProducts;
 

@@ -12,7 +12,7 @@ const Clients: React.FC<Props> = props => {
   return (
     <div className="zen-clients">
       {clients.map(c => (
-        <div key={c.clientId} className="zen-client">
+        <div key={c.zenId} className="zen-client">
           <div className="primary">
             <div className="name">{c.firstName + ' ' + c.lastName}</div>
             <div className="gender">{c.gender}</div>

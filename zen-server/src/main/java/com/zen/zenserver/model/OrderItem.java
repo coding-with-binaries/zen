@@ -1,5 +1,6 @@
 package com.zen.zenserver.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Table(name = "order_items")
 @Entity
@@ -20,12 +21,12 @@ public class OrderItem {
 
 	private int quantity;
 
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Product product;
 
 	public int getZenId() {

@@ -2,4 +2,5 @@
   background-color: honeydew;
   overflow: hidden;
   border-right: 1px solid #c1dbc1;
+  z-index: 5;
 }

@@ -1,18 +1,17 @@
 package com.zen.zenserver.model;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Table(name = "products")
 @Entity
-@Inheritance
-@DiscriminatorColumn(name = "is_a")
-public abstract class Product {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,7 +8,8 @@ const initialState: StoreState = {
     payload: {
       data: []
     }
-  }
+  },
+  draftOrders: []
 };
 
 export default initialState;
