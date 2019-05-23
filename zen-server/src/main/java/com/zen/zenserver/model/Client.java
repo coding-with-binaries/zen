@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table(name = "clients")
@@ -33,6 +35,7 @@ public class Client {
 
 	private String phoneNumber;
 
+	@NaturalId
 	private String email;
 
 	private String dateOfBirth;

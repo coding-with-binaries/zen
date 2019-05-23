@@ -1,11 +1,11 @@
 package com.zen.zenserver.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zen.zenserver.exception.ZenException;
 import com.zen.zenserver.model.Client;
 import com.zen.zenserver.repository.ClientRepository;
 
@@ -18,12 +18,13 @@ public class ClientService {
 		return clientRepository.findAll();
 	}
 
-	public Optional<Client> getClient(int zenId) {
-		return clientRepository.findById(zenId);
+	public Client getClient(int zenId) {
+		return clientRepository.findById(zenId).orElseThrow(() -> new ZenException("Client not found with id : " + zenId));
 	}
 
-	public void addClient(Client client) {
+	public Client addClient(Client client) {
 		clientRepository.save(client);
+		return client;
 	}
 
 	public void updateClient(Client client) {

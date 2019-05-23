@@ -9,5 +9,4 @@ public class ZenServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZenServerApplication.class, args);
 	}
-
 }

@@ -1,33 +1,35 @@
 package com.zen.zenserver.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zen.zenserver.model.RegularProduct;
-import com.zen.zenserver.repository.RegularProductRepository;
+import com.zen.zenserver.exception.ZenException;
+import com.zen.zenserver.model.Product;
+import com.zen.zenserver.model.Product.Source;
+import com.zen.zenserver.repository.ProductRepository;
 
 @Service
 public class ProductService {
 
 	@Autowired
-	private RegularProductRepository regularProductRepository;
+	private ProductRepository productRepository;
 
-	public List<RegularProduct> getAllProducts() {
-		return regularProductRepository.findAll();
+	public List<Product> getAllProducts() {
+		return productRepository.findAllBySource(Source.standard);
 	}
 
-	public Optional<RegularProduct> getProductById(int zenId) {
-		return regularProductRepository.findById(zenId);
+	public Product getProductById(int zenId) {
+		return productRepository.findById(zenId)
+				.orElseThrow(() -> new ZenException("Product not found with id : " + zenId));
 	}
 
-	public List<RegularProduct> searchProduct(String pattern) {
-		return regularProductRepository.searchProduct(pattern);
+	public List<Product> searchProduct(String pattern) {
+		return productRepository.searchProductBySource(pattern, Source.standard);
 	}
 
-	public RegularProduct addProduct(RegularProduct regularProduct) {
-		return regularProductRepository.save(regularProduct);
+	public Product addProduct(Product product) {
+		return productRepository.save(product);
 	}
 }

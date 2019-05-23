@@ -3,9 +3,7 @@ import { FiX } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
 import { Order } from '../../types/Order';
 import { usePrevious } from '../../utils/Hooks';
-import OrderAppointment, {
-  Props as AppointmentProps
-} from './OrderAppointment';
+import OrderDraft, { Props as DraftProps } from './OrderDraft';
 import './Orders.css';
 
 const orders: Order[] = [
@@ -80,8 +78,8 @@ const Orders: React.FC = () => {
       transform: `translate3d(${isNext ? '' : '-'}100%,0,0)`
     }
   });
-  const appointments = orders.map(o => ({ style }: AppointmentProps) => (
-    <OrderAppointment style={style}>{o.zenId}</OrderAppointment>
+  const drafts = orders.map(o => ({ style }: DraftProps) => (
+    <OrderDraft style={style}>{o.zenId}</OrderDraft>
   ));
   return (
     <div className="zen-orders">
@@ -101,8 +99,8 @@ const Orders: React.FC = () => {
       </div>
       <div className="zen-order-contents">
         {transitions.map(({ item, props, key }) => {
-          const Appointment = appointments[item];
-          return <Appointment key={key} style={props} />;
+          const Draft = drafts[item];
+          return <Draft key={key} style={props} />;
         })}
       </div>
     </div>

@@ -1,8 +1,8 @@
-package com.zen.zenserver.types;
+package com.zen.zenserver.payload;
 
 import java.util.Date;
 
-public class Dates {
+public class OrdersBetweenRequest {
 	private Date startDate;
 
 	private Date endDate;

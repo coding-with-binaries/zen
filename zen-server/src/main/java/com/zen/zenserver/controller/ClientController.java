@@ -1,41 +1,50 @@
 package com.zen.zenserver.controller;
 
-import java.util.List;
-import java.util.Optional;
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.zen.zenserver.exception.ZenException;
 import com.zen.zenserver.model.Client;
+import com.zen.zenserver.payload.ApiResponse;
 import com.zen.zenserver.service.ClientService;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "/api/clients")
 public class ClientController {
 	@Autowired
 	public ClientService clientService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Client> getAllClients() {
-		return clientService.getAllClients();
+	public ResponseEntity<?> getAllClients() {
+		return ResponseEntity.ok(clientService.getAllClients());
 	}
 
 	@RequestMapping(value = "/{zenId}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Client> getClient(@PathVariable int zenId) {
-		return clientService.getClient(zenId);
+	public ResponseEntity<?> getClient(@PathVariable int zenId) {
+		try {
+			return ResponseEntity.ok(clientService.getClient(zenId));
+		} catch (ZenException exception) {
+			return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Client addClient(@RequestBody Client client) {
-		clientService.addClient(client);
-		return client;
+	public ResponseEntity<?> addClient(@RequestBody Client client) {
+		Client result = clientService.addClient(client);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/clients/{zenId}")
+				.buildAndExpand(result.getZenId()).toUri();
+
+		return ResponseEntity.created(location).body(result);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
@@ -45,7 +54,7 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/search/{pattern}", method = RequestMethod.GET)
-	public @ResponseBody List<Client> searchClients(@PathVariable String pattern) {
-		return clientService.searchClients(pattern);
+	public ResponseEntity<?> searchClients(@PathVariable String pattern) {
+		return ResponseEntity.ok(clientService.searchClients(pattern));
 	}
 }

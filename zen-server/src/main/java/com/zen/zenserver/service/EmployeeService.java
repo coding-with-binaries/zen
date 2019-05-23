@@ -3,6 +3,7 @@ package com.zen.zenserver.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zen.zenserver.exception.ZenException;
 import com.zen.zenserver.model.Employee;
 import com.zen.zenserver.repository.EmployeeRepository;
 
@@ -10,13 +11,19 @@ import com.zen.zenserver.repository.EmployeeRepository;
 public class EmployeeService {
 
 	@Autowired
-	private EmployeeRepository employeeRepository;
+	EmployeeRepository employeeRepository;
 
-	public Employee checkLoginCredentials(String email, String password) {
-		return employeeRepository.isValidEmployee(email, password);
+	public boolean isEmailAvailable(String email) {
+		return !employeeRepository.existsByEmail(email);
 	}
 
-	public void addEmployee(Employee employee) {
+	public Employee getEmployeeByEmail(String email) {
+		return employeeRepository.findByEmail(email)
+				.orElseThrow(() -> new ZenException("Employee not found with email : " + email));
+	}
+
+	public Employee addEmployee(Employee employee) {
 		employeeRepository.save(employee);
+		return employee;
 	}
 }

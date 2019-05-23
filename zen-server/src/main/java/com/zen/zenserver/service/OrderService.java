@@ -2,11 +2,11 @@ package com.zen.zenserver.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zen.zenserver.exception.ZenException;
 import com.zen.zenserver.model.Order;
 import com.zen.zenserver.repository.OrderRepository;
 
@@ -24,8 +24,8 @@ public class OrderService {
 		return orderRepository.save(order);
 	}
 
-	public Optional<Order> getOrderById(int zenId) {
-		return orderRepository.findById(zenId);
+	public Order getOrderById(int zenId) {
+		return orderRepository.findById(zenId).orElseThrow(() -> new ZenException("Order not found with id : " + zenId));
 	}
 
 	public List<Order> getAllOrdersBetween(Date startDate, Date endDate) {
