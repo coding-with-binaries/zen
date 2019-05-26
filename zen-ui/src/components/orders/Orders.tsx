@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
-import { useTransition } from 'react-spring';
+import { useTransition } from 'react-spring/web.cjs';
 import { Order } from '../../types/Order';
 import { usePrevious } from '../../utils/Hooks';
-import OrderDraft, { Props as DraftProps } from './OrderDraft';
+import OrderBlueprint, { Props as BlueprintProps } from './OrderBlueprint';
 import './Orders.css';
 
 const orders: Order[] = [
@@ -78,8 +78,9 @@ const Orders: React.FC = () => {
       transform: `translate3d(${isNext ? '' : '-'}100%,0,0)`
     }
   });
-  const drafts = orders.map(o => ({ style }: DraftProps) => (
-    <OrderDraft style={style}>{o.zenId}</OrderDraft>
+
+  const blueprints = orders.map(o => ({ style }: BlueprintProps) => (
+    <OrderBlueprint style={style} />
   ));
   return (
     <div className="zen-orders">
@@ -99,8 +100,8 @@ const Orders: React.FC = () => {
       </div>
       <div className="zen-order-contents">
         {transitions.map(({ item, props, key }) => {
-          const Draft = drafts[item];
-          return <Draft key={key} style={props} />;
+          const Blueprint = blueprints[item];
+          return <Blueprint key={key} style={props} />;
         })}
       </div>
     </div>

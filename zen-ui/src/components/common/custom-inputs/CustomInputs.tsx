@@ -1,5 +1,5 @@
+import { ErrorMessage, FieldProps } from 'formik';
 import React from 'react';
-import { ErrorMessage, FieldProps } from '../../../../node_modules/formik';
 import './CustomInputs.css';
 
 type InputProps = {

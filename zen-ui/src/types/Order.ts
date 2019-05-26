@@ -10,7 +10,7 @@ export interface Order {
 }
 
 export interface OrderItem {
-  products: Product[];
+  product?: Product;
   quantity: number;
   discount: number;
 }

@@ -21,6 +21,7 @@
     "align": [true, "elements", "members", "parameters", "statements"],
     "no-trailing-whitespace": true,
     "semicolon": [true, "always"],
+    "jsx-no-lambda": false,
     "variable-name": [
       true,
       "ban-keywords",

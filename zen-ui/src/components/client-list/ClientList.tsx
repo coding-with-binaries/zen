@@ -8,8 +8,8 @@ import Clients from '../common/clients';
 import Spinner from '../common/spinner';
 
 const ClientList: React.FC = () => {
-  const clients: ClientsType = useSelector(
-    (state: StoreState) => state.clients
+  const clientState: ClientsType = useSelector(
+    (state: StoreState) => state.clientState
   );
   const dispatch = useDispatch();
 
@@ -21,10 +21,10 @@ const ClientList: React.FC = () => {
     <div className="zen-nav-drawer">
       <div className="nav-drawer-header">
         <span className="nav-drawer-title">View List of Clients</span>
-        {clients.fetching ? (
+        {clientState.fetching ? (
           <Spinner size="sm" />
         ) : (
-          clients.failed && (
+          clientState.failed && (
             <FiAlertCircle
               size="32"
               fill="honeydew"
@@ -35,7 +35,7 @@ const ClientList: React.FC = () => {
         )}
       </div>
       <div className="zen-client-list">
-        <Clients clients={clients.payload.data} />
+        <Clients clients={clientState.clients} />
       </div>
     </div>
   );

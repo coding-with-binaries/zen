@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { TOGGLE_NAV_DRAWER, ToggleNavDrawer } from '../actions/NavDrawer';
-import clients from './Clients';
+import clientState from './Clients';
 
 const navDrawerReducer = (
   state: boolean = false,
@@ -16,5 +16,5 @@ const navDrawerReducer = (
 
 export default combineReducers({
   navDrawer: navDrawerReducer,
-  clients
+  clientState
 });

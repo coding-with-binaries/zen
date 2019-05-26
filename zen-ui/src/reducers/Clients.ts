@@ -4,7 +4,7 @@ import initialState from '../initial-state';
 import { Clients } from '../types/Client';
 
 const clientReducer = (
-  state: Clients = initialState.clients,
+  state: Clients = initialState.clientState,
   action: ClientAction
 ): Clients => {
   switch (action.type) {
@@ -24,9 +24,7 @@ const clientReducer = (
       return {
         ...state,
         fetching: false,
-        payload: {
-          data: action.payload.clients
-        }
+        clients: action.payload.clients
       };
     default:
       return state;

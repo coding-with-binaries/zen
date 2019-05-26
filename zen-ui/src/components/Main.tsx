@@ -1,14 +1,21 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import ProtectedRoute from './common/protected-route';
 import Home from './home';
 import Login from './login';
 
 const Main: React.FC = () => {
+  const authenticated = true;
   return (
     <div className="zen">
       <Switch>
-        <Route path="/home" component={Home} />
+        <ProtectedRoute authenticated={true} path="/home" component={Home} />
         <Route path="/login" component={Login} />
+        <Redirect
+          exact={true}
+          path="/"
+          to={authenticated ? '/home' : '/login'}
+        />
       </Switch>
     </div>
   );

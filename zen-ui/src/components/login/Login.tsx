@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
+import { AuthPayload } from '../../types/Auth';
 import './Login.css';
 
 type Props = RouteComponentProps;
@@ -14,14 +15,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login: React.FC<Props> = props => {
-  const { history } = props;
-  const initialLogin = {
+  const initialPayload: AuthPayload = {
     email: '',
     password: ''
   };
 
   const login = (values: FormikValues) => {
-    history.push('/home');
+    console.log(values); //tslint:disable-line
   };
 
   return (
@@ -35,7 +35,7 @@ const Login: React.FC<Props> = props => {
       </div>
       <div className="right-panel">
         <Formik
-          initialValues={initialLogin}
+          initialValues={initialPayload}
           validationSchema={validationSchema}
           onSubmit={login}
         >

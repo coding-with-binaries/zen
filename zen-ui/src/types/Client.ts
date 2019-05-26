@@ -11,7 +11,5 @@ export interface Client {
 export interface Clients {
   fetching: boolean;
   failed: boolean;
-  payload: {
-    data: Client[];
-  };
+  clients: Client[];
 }

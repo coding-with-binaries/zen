@@ -2,14 +2,19 @@ import { StoreState } from '../types';
 
 const initialState: StoreState = {
   navDrawer: false,
-  clients: {
+  auth: {
+    validating: false,
+    failed: {
+      status: false
+    },
+    authUser: null
+  },
+  clientState: {
     fetching: true,
     failed: false,
-    payload: {
-      data: []
-    }
+    clients: []
   },
-  draftOrders: []
+  orderBlueprints: []
 };
 
 export default initialState;
