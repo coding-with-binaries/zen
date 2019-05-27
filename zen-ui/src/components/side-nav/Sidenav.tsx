@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import { toggleNavDrawer } from '../../actions/NavDrawer';
 import { routes } from '../../constants/HomeConstants';
+import { ZEN_AUTH_TOKEN } from '../../constants/ZenConstants';
 import { StoreState } from '../../types';
 import './Sidenav.css';
 
@@ -31,7 +32,10 @@ const Sidenav: React.FC<Props> = props => {
     dispatch
   ]);
 
-  const logout = () => history.push('/login');
+  const logout = () => {
+    localStorage.removeItem(ZEN_AUTH_TOKEN);
+    history.push('/login');
+  };
 
   const onNavItemClick = (from: string) => () => {
     if (!navDrawer || (navDrawer && from === pathname)) {

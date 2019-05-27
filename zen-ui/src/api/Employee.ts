@@ -15,7 +15,9 @@ export const getAuthToken = async (
 export const getCurrentEmployee = async (): Promise<AuthUser> => {
   if (localStorage.getItem(ZEN_AUTH_TOKEN)) {
     const response = await axios.get(GET_CURRENT_EMPLOYEE_URL, {
-      headers: { 'zen-auth-token': localStorage.getItem(ZEN_AUTH_TOKEN) }
+      headers: {
+        'zen-auth-token': `token:${localStorage.getItem(ZEN_AUTH_TOKEN)}`
+      }
     });
     return response.data;
   } else {

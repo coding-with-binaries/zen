@@ -1,5 +1,8 @@
+import { connectRouter } from 'connected-react-router';
+import { History } from 'history';
 import { combineReducers } from 'redux';
 import { TOGGLE_NAV_DRAWER, ToggleNavDrawer } from '../actions/NavDrawer';
+import auth from './Auth';
 import clientState from './Clients';
 
 const navDrawerReducer = (
@@ -14,7 +17,12 @@ const navDrawerReducer = (
   }
 };
 
-export default combineReducers({
-  navDrawer: navDrawerReducer,
-  clientState
-});
+const rootReducer = (history: History) =>
+  combineReducers({
+    router: connectRouter(history),
+    navDrawer: navDrawerReducer,
+    clientState,
+    auth
+  });
+
+export default rootReducer;

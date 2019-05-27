@@ -1,21 +1,20 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import ProtectedRoute from './common/protected-route';
+import { ZEN_AUTH_TOKEN } from '../constants/ZenConstants';
 import Home from './home';
-import Login from './login';
 
 const Main: React.FC = () => {
-  const authenticated = true;
+  const authenticated = localStorage.getItem(ZEN_AUTH_TOKEN) !== null;
+
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div className="zen">
       <Switch>
-        <ProtectedRoute authenticated={true} path="/home" component={Home} />
-        <Route path="/login" component={Login} />
-        <Redirect
-          exact={true}
-          path="/"
-          to={authenticated ? '/home' : '/login'}
-        />
+        <Route path="/home" component={Home} />
+        <Redirect exact={true} path="/" to="/home" />
       </Switch>
     </div>
   );

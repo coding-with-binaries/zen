@@ -1,6 +1,8 @@
+import { push } from 'connected-react-router';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import * as Actions from '../actions/auth/ActionConstants';
 import {
+  authenticateEmployeeFailed,
   authenticateEmployeeSuccess,
   getCurrentEmployeeFailed,
   getCurrentEmployeeSuccess
@@ -32,8 +34,21 @@ function* authenticateEmployeeSaga(action: AuthenticateEmployee) {
     localStorage.setItem(ZEN_AUTH_TOKEN, authResponse.accessToken);
     const authUser: AuthUser = yield call(getCurrentEmployee);
     yield put(authenticateEmployeeSuccess(authUser));
+    yield put(push('/'));
   } catch (error) {
-    // Error
+    let message: string;
+    switch (error.status) {
+      case 500:
+        message = 'Internal Server Error';
+        break;
+      case 401:
+        message = 'Invalid credentials';
+        break;
+      default:
+        message = 'Something went wrong';
+    }
+    yield put(authenticateEmployeeFailed(message));
+    localStorage.removeItem(ZEN_AUTH_TOKEN);
   }
 }
 

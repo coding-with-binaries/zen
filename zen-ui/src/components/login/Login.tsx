@@ -1,7 +1,10 @@
-import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
+import { authenticateEmployee } from '../../actions/auth/Actions';
+import { ZEN_AUTH_TOKEN } from '../../constants/ZenConstants';
 import { AuthPayload } from '../../types/Auth';
 import './Login.css';
 
@@ -15,13 +18,20 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login: React.FC<Props> = props => {
+  const authenticated = localStorage.getItem(ZEN_AUTH_TOKEN) !== null;
+  const dispatch = useDispatch();
+
+  if (authenticated) {
+    return <Redirect to="/" />;
+  }
+
   const initialPayload: AuthPayload = {
     email: '',
     password: ''
   };
 
-  const login = (values: FormikValues) => {
-    console.log(values); //tslint:disable-line
+  const checkLoginCredentials = (authPayload: AuthPayload) => {
+    dispatch(authenticateEmployee(authPayload));
   };
 
   return (
@@ -37,7 +47,7 @@ const Login: React.FC<Props> = props => {
         <Formik
           initialValues={initialPayload}
           validationSchema={validationSchema}
-          onSubmit={login}
+          onSubmit={checkLoginCredentials}
         >
           {({ isValid, errors, touched }) => (
             <Form className="login-form">
