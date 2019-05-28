@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addOrderBlueprint } from '../../actions/order/Actions';
 import { searchClient } from '../../api/Client';
 import { Client } from '../../types/Client';
 import Clients from '../common/clients';
@@ -9,9 +11,15 @@ const NewAppointment: React.FC = () => {
 
   const [clients, setClients] = useState<Client[]>([]);
 
+  const dispatch = useDispatch();
+
   const onClientChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
     setPattern(e.target.value);
+  };
+
+  const onClientClick = (client: Client) => {
+    dispatch(addOrderBlueprint(client));
   };
 
   useEffect(() => {
@@ -37,7 +45,9 @@ const NewAppointment: React.FC = () => {
           />
         </div>
         <div className="zen-clients-result">
-          {pattern !== '' && <Clients clients={clients} />}
+          {pattern !== '' && (
+            <Clients clients={clients} onClick={onClientClick} />
+          )}
         </div>
       </div>
     </div>

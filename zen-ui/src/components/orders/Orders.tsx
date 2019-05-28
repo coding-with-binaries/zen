@@ -1,69 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiX } from 'react-icons/fi';
-import { useTransition } from 'react-spring/web.cjs';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTransition } from 'react-spring';
+import {
+  deleteOrderBlueprint,
+  selectOrderBlueprint
+} from '../../actions/order/Actions';
+import { StoreState } from '../../types';
 import { Order } from '../../types/Order';
-import { usePrevious } from '../../utils/Hooks';
 import OrderBlueprint, { Props as BlueprintProps } from './OrderBlueprint';
 import './Orders.css';
 
-const orders: Order[] = [
-  {
-    appointmentDate: new Date(),
-    client: {
-      dateOfBirth: '1995-09-06',
-      email: 'coding.with.binaries@gmail.com',
-      firstName: 'Varun',
-      gender: 'male',
-      lastName: 'Sharma',
-      phoneNumber: '9686991295',
-      zenId: 1
-    },
-    orderDate: new Date(),
-    orderItems: [],
-    total: 4000,
-    zenId: 1
-  },
-  {
-    appointmentDate: new Date(),
-    client: {
-      dateOfBirth: '1995-09-06',
-      email: 'coding.with.binaries@gmail.com',
-      firstName: 'Varun',
-      gender: 'male',
-      lastName: 'Sharma',
-      phoneNumber: '9686991295',
-      zenId: 1
-    },
-    orderDate: new Date(),
-    orderItems: [],
-    total: 3000,
-    zenId: 2
-  },
-  {
-    appointmentDate: new Date(),
-    client: {
-      dateOfBirth: '1995-09-06',
-      email: 'coding.with.binaries@gmail.com',
-      firstName: 'Varun',
-      gender: 'male',
-      lastName: 'Sharma',
-      phoneNumber: '9686991295',
-      zenId: 1
-    },
-    orderDate: new Date(),
-    orderItems: [],
-    total: 4000,
-    zenId: 3
-  }
-];
-
 const Orders: React.FC = () => {
-  const [active, setActive] = useState(0);
-  const prevActive = usePrevious(active);
+  const active: number = useSelector(
+    (state: StoreState) => state.orders.blueprints.active
+  );
+
+  const prevActive: number | undefined = useSelector(
+    (state: StoreState) => state.orders.blueprints.prevActive
+  );
+
   const isNext = prevActive && prevActive > active;
+
+  const dispatch = useDispatch();
+
   const onTabClick = (index: number) => () => {
-    setActive(index);
+    dispatch(selectOrderBlueprint(index));
   };
+
+  const onCloseTab = (index: number) => () => {
+    dispatch(deleteOrderBlueprint(index));
+  };
+
   const transitions = useTransition(active, p => p, {
     from:
       prevActive !== undefined
@@ -79,31 +47,43 @@ const Orders: React.FC = () => {
     }
   });
 
-  const blueprints = orders.map(o => ({ style }: BlueprintProps) => (
-    <OrderBlueprint style={style} />
+  const orders: Order[] = useSelector(
+    (state: StoreState) => state.orders.blueprints.items
+  );
+
+  const blueprints = orders.map(o => ({ style, index }: BlueprintProps) => (
+    <OrderBlueprint style={style} index={index} />
   ));
+
   return (
     <div className="zen-orders">
       <div className="zen-order-tabs">
         {orders.map((o, i) => (
           <div
-            key={o.zenId}
+            key={i}
             className={`zen-order-tab${i === active ? ' active' : ''}`}
-            onClick={onTabClick(i)}
           >
-            <span className="order-tab-title">{`Order#${o.zenId} ${
-              o.client.firstName
-            } ${o.client.lastName}`}</span>
-            <FiX size="14" />
+            <div className="order-tab-container" onClick={onTabClick(i)}>
+              <span className="order-tab-title">{`Order#${i + 1} ${
+                o.client.firstName
+              } ${o.client.lastName}`}</span>
+            </div>
+            <span className="order-tab-close" onClick={onCloseTab(i)}>
+              <FiX size="12" />
+            </span>
           </div>
         ))}
       </div>
-      <div className="zen-order-contents">
-        {transitions.map(({ item, props, key }) => {
-          const Blueprint = blueprints[item];
-          return <Blueprint key={key} style={props} />;
-        })}
-      </div>
+      {orders && orders.length > 0 && (
+        <div className="zen-order-contents">
+          {transitions.map(({ item, props, key }) => {
+            const Blueprint = blueprints[item];
+            return (
+              Blueprint && <Blueprint key={key} style={props} index={item} />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

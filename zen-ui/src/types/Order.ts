@@ -21,3 +21,12 @@ export interface Product {
   price: number;
   productType: string;
 }
+
+export interface Orders {
+  blueprints: {
+    active: number;
+    prevActive?: number;
+    items: Order[];
+  };
+  receipts: Order[];
+}

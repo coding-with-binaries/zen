@@ -10,9 +10,9 @@
 
 .zen-order-tab {
   background-color: #43a047;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 24px;
   align-items: center;
-  justify-content: space-between;
   padding: 0 12px;
   height: 100%;
   width: 220px;
@@ -28,12 +28,44 @@
   color: #529e56;
 }
 
+.zen-order-tab .order-tab-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .zen-order-tab .order-tab-title {
   width: 180px;
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.zen-order-tab .order-tab-close {
+  background: #ffffff66;
+  color: #529e56;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  height: 16px;
+  width: 16px;
+}
+
+.zen-order-tab .order-tab-close:hover {
+  background: #ffffff88;
+}
+
+.zen-order-tab.active .order-tab-close {
+  background: #44a0473d;
+}
+
+.zen-order-tab.active .order-tab-close:hover {
+  background: #44a047a8;
+  color: white;
 }
 
 .zen-order-contents {

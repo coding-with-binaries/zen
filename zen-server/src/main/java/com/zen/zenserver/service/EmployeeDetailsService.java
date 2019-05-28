@@ -21,7 +21,7 @@ public class EmployeeDetailsService implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Employee employee = employeeRepository.findByEmail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
+				.orElseThrow(() -> new UsernameNotFoundException("Employee not found with email : " + email));
 
 		return EmployeeDetails.create(employee);
 	}
@@ -29,7 +29,7 @@ public class EmployeeDetailsService implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserById(int zenId) {
 		Employee employee = employeeRepository.findById(zenId)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + zenId));
+				.orElseThrow(() -> new UsernameNotFoundException("Employee not found with id : " + zenId));
 
 		return EmployeeDetails.create(employee);
 	}

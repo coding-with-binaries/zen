@@ -14,7 +14,13 @@ const initialState: StoreState = {
     failed: false,
     clients: []
   },
-  orderBlueprints: []
+  orders: {
+    blueprints: {
+      active: 0,
+      items: []
+    },
+    receipts: []
+  }
 };
 
 export default initialState;

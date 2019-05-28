@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ZEN_AUTH_TOKEN } from '../constants/ZenConstants';
+import { headers } from '../constants/ZenConstants';
 import { AuthPayload, AuthResponse, AuthUser } from '../types/Auth';
 
 const LOGIN_URL = `/api/auth/signin`;
@@ -8,19 +8,21 @@ const GET_CURRENT_EMPLOYEE_URL = `/api/employees/current`;
 export const getAuthToken = async (
   payload: AuthPayload
 ): Promise<AuthResponse> => {
-  const response = await axios.post(LOGIN_URL, payload);
-  return response.data;
+  try {
+    const response = await axios.post(LOGIN_URL, payload);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const getCurrentEmployee = async (): Promise<AuthUser> => {
-  if (localStorage.getItem(ZEN_AUTH_TOKEN)) {
+  try {
     const response = await axios.get(GET_CURRENT_EMPLOYEE_URL, {
-      headers: {
-        'zen-auth-token': `token:${localStorage.getItem(ZEN_AUTH_TOKEN)}`
-      }
+      headers: headers()
     });
     return response.data;
-  } else {
-    return Promise.reject('No access token set. Please signin');
+  } catch (error) {
+    return Promise.reject(error);
   }
 };

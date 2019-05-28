@@ -3,7 +3,8 @@ import { History } from 'history';
 import { combineReducers } from 'redux';
 import { TOGGLE_NAV_DRAWER, ToggleNavDrawer } from '../actions/NavDrawer';
 import auth from './Auth';
-import clientState from './Clients';
+import clientState from './Client';
+import orders from './Order';
 
 const navDrawerReducer = (
   state: boolean = false,
@@ -22,7 +23,8 @@ const rootReducer = (history: History) =>
     router: connectRouter(history),
     navDrawer: navDrawerReducer,
     clientState,
-    auth
+    auth,
+    orders
   });
 
 export default rootReducer;

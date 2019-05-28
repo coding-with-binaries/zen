@@ -9,12 +9,15 @@ import {
 } from 'formik';
 import React, { useRef } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
-import { animated, AnimatedValue, ForwardedProps } from 'react-spring/web.cjs';
-import { OrderItem } from '../../types/Order';
+import { useSelector } from 'react-redux';
+import { animated, AnimatedValue, ForwardedProps } from 'react-spring';
+import { StoreState } from '../../types';
+import { Order, OrderItem } from '../../types/Order';
 import './OrderBlueprint.css';
 
 export interface Props {
   style: AnimatedValue<ForwardedProps<React.CSSProperties>>;
+  index: number;
 }
 
 interface OrderBlueprintValues {
@@ -22,11 +25,18 @@ interface OrderBlueprintValues {
 }
 
 const OrderBlueprint: React.FC<Props> = props => {
-  const dateNow = new Date();
-  const datetime = useRef(
-    dateNow.toLocaleDateString() + ', ' + dateNow.toLocaleTimeString()
+  const { style, index } = props;
+  const blueprint: Order = useSelector(
+    (state: StoreState) => state.orders.blueprints.items[index]
   );
 
+  const datetime = useRef(
+    blueprint.orderDate.toLocaleDateString() +
+      ', ' +
+      blueprint.orderDate.toLocaleTimeString()
+  );
+
+  const total = 0;
   const initialOrderItem: OrderItem = {
     discount: 0,
     quantity: 0,
@@ -95,7 +105,7 @@ const OrderBlueprint: React.FC<Props> = props => {
           <tr>
             <td colSpan={3} />
             <td className="order-total" colSpan={3}>
-              Total: INR 1230
+              Total: INR {total}
             </td>
           </tr>
         </tbody>
@@ -104,7 +114,7 @@ const OrderBlueprint: React.FC<Props> = props => {
   };
 
   return (
-    <animated.div className="zen-order-blueprint" style={props.style}>
+    <animated.div className="zen-order-blueprint" style={style}>
       <div className="blueprint-invoice-wrapper">
         <div className="blueprint-invoice">
           <div className="invoice-header">
