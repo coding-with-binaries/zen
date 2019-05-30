@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTransition } from 'react-spring';
@@ -6,6 +6,7 @@ import {
   deleteOrderBlueprint,
   selectOrderBlueprint
 } from '../../actions/order/Actions';
+import { fetchProducts } from '../../actions/product/Actions';
 import { StoreState } from '../../types';
 import { Order } from '../../types/Order';
 import OrderBlueprint, { Props as BlueprintProps } from './OrderBlueprint';
@@ -22,15 +23,23 @@ const Orders: React.FC = () => {
 
   const isNext = prevActive && prevActive > active;
 
+  const blueprintRef = createRef<any>();
   const dispatch = useDispatch();
 
   const onTabClick = (index: number) => () => {
+    if (blueprintRef.current) {
+      blueprintRef.current.saveOrderBlueprint();
+    }
     dispatch(selectOrderBlueprint(index));
   };
 
   const onCloseTab = (index: number) => () => {
     dispatch(deleteOrderBlueprint(index));
   };
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const transitions = useTransition(active, p => p, {
     from:
@@ -51,9 +60,16 @@ const Orders: React.FC = () => {
     (state: StoreState) => state.orders.blueprints.items
   );
 
-  const blueprints = orders.map(o => ({ style, index }: BlueprintProps) => (
-    <OrderBlueprint style={style} index={index} />
-  ));
+  const blueprints = orders.map(
+    o => ({ style, index, client }: BlueprintProps) => (
+      <OrderBlueprint
+        style={style}
+        index={index}
+        client={client}
+        ref={blueprintRef}
+      />
+    )
+  );
 
   return (
     <div className="zen-orders">
@@ -79,7 +95,14 @@ const Orders: React.FC = () => {
           {transitions.map(({ item, props, key }) => {
             const Blueprint = blueprints[item];
             return (
-              Blueprint && <Blueprint key={key} style={props} index={item} />
+              Blueprint && (
+                <Blueprint
+                  key={key}
+                  style={props}
+                  client={orders[item].client}
+                  index={item}
+                />
+              )
             );
           })}
         </div>

@@ -1,10 +1,11 @@
 import { Client } from './Client';
+import { Product } from './Product';
 
 export interface Order {
   zenId?: number;
   client: Client;
-  appointmentDate: Date;
-  orderDate: Date;
+  appointmentDate: number;
+  orderDate: number;
   total: number;
   orderItems: OrderItem[];
 }
@@ -13,13 +14,6 @@ export interface OrderItem {
   product?: Product;
   quantity: number;
   discount: number;
-}
-
-export interface Product {
-  zenId: number;
-  description: string;
-  price: number;
-  productType: string;
 }
 
 export interface Orders {

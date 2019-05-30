@@ -18,6 +18,8 @@ function* getCurrentEmployeeSaga() {
     yield put(getCurrentEmployeeSuccess(authUser));
   } catch (error) {
     yield put(getCurrentEmployeeFailed(error));
+    localStorage.removeItem(ZEN_AUTH_TOKEN);
+    yield put(push('/'));
   }
 }
 

@@ -1,7 +1,7 @@
 package com.zen.zenserver.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class Order {
 
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
-	private Set<OrderItem> orderProducts;
+	private List<OrderItem> orderItems;
 
 	public int getZenId() {
 		return zenId;
@@ -88,11 +88,11 @@ public class Order {
 		this.client = client;
 	}
 
-	public Set<OrderItem> getOrderProducts() {
-		return orderProducts;
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
-	public void setOrderProducts(Set<OrderItem> orderProducts) {
-		this.orderProducts = orderProducts;
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 }

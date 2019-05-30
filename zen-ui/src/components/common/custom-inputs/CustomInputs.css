@@ -60,3 +60,47 @@ input.zen-input.has-error:focus {
 .zen-radio {
   margin-right: 8px;
 }
+
+.zen-search {
+  position: relative;
+}
+
+.zen-search .zen-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% - 4px);
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 0.125rem rgba(115, 115, 115, 0.25);
+  margin-top: 0.083333rem;
+  padding: 0.5rem 0;
+  visibility: visible;
+  z-index: 20;
+}
+
+.zen-dropdown .dropdown-item {
+  font-size: 10px;
+  letter-spacing: normal;
+  font-weight: 400;
+  background: 0 0;
+  border: 0;
+  color: #565656;
+  cursor: pointer;
+  display: block;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  padding: 8px 16px;
+  text-transform: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.zen-dropdown .dropdown-item:hover {
+  background-color: #eee;
+}

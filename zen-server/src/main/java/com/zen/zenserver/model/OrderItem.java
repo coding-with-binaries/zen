@@ -26,7 +26,8 @@ public class OrderItem {
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(referencedColumnName = "zenId")
 	private Product product;
 
 	public int getZenId() {

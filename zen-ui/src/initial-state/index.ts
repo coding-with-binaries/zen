@@ -20,6 +20,11 @@ const initialState: StoreState = {
       items: []
     },
     receipts: []
+  },
+  productState: {
+    fetching: true,
+    failed: false,
+    products: []
   }
 };
 

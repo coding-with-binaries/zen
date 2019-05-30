@@ -5,7 +5,10 @@ import {
   AddOrderBlueprint,
   DeleteOrderBlueprint,
   SaveOrderBlueprint,
-  SelectOrderBlueprint
+  SelectOrderBlueprint,
+  SubmitOrder,
+  SubmitOrderFailed,
+  SubmitOrderSuccess
 } from './ActionTypes';
 
 export const selectOrderBlueprint = (index: number): SelectOrderBlueprint => ({
@@ -29,4 +32,17 @@ export const saveOrderBlueprint = (
 ): SaveOrderBlueprint => ({
   type: Actions.SAVE_ORDER_BLUEPRINT,
   payload: { index, blueprint }
+});
+
+export const submitOrder = (order: Order): SubmitOrder => ({
+  type: Actions.SUBMIT_ORDER,
+  payload: { order }
+});
+
+export const submitOrderFailed = (): SubmitOrderFailed => ({
+  type: Actions.SUBMIT_ORDER_FAILED
+});
+
+export const submitOrderSuccess = (): SubmitOrderSuccess => ({
+  type: Actions.SUBMIT_ORDER_SUCCESS
 });

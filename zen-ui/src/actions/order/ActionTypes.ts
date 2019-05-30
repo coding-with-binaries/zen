@@ -31,6 +31,21 @@ export interface SaveOrderBlueprint {
   };
 }
 
+export interface SubmitOrder {
+  type: Actions.SUBMIT_ORDER;
+  payload: {
+    order: Order;
+  };
+}
+
+export interface SubmitOrderFailed {
+  type: Actions.SUBMIT_ORDER_FAILED;
+}
+
+export interface SubmitOrderSuccess {
+  type: Actions.SUBMIT_ORDER_SUCCESS;
+}
+
 export type OrderAction =
   | SelectOrderBlueprint
   | AddOrderBlueprint
