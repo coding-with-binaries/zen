@@ -14,12 +14,18 @@ const initialState: StoreState = {
     failed: false,
     clients: []
   },
-  orders: {
-    blueprints: {
+  orderState: {
+    fetching: true,
+    failed: false,
+    orders: [],
+    blueprint: {
       active: 0,
       items: []
     },
-    receipts: []
+    receipt: {
+      active: 0,
+      items: []
+    }
   },
   productState: {
     fetching: true,

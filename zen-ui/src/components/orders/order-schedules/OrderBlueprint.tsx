@@ -8,13 +8,16 @@ import React, {
 import { FiTrash2 } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { animated, AnimatedValue, ForwardedProps } from 'react-spring';
-import { saveOrderBlueprint, submitOrder } from '../../actions/order/Actions';
-import { StoreState } from '../../types';
-import { Client } from '../../types/Client';
-import { Order, OrderItem } from '../../types/Order';
-import { Product, Products } from '../../types/Product';
-import { debounce } from '../../utils/Helpers';
-import { ZenField, ZenSearch } from '../common/custom-inputs';
+import {
+  saveOrderBlueprint,
+  submitOrder
+} from '../../../actions/order/blueprints/Actions';
+import { StoreState } from '../../../types';
+import { Client } from '../../../types/Client';
+import { Order, OrderItem } from '../../../types/Order';
+import { Product, Products } from '../../../types/Product';
+import { debounce } from '../../../utils/Helpers';
+import { ZenField, ZenSearch } from '../../common/custom-inputs';
 import './OrderBlueprint.css';
 
 export interface Props {
@@ -32,7 +35,7 @@ const OrderBlueprint: React.FC<Props> = (props, ref) => {
   const { style, index, client } = props;
 
   const blueprint: Order = useSelector(
-    (state: StoreState) => state.orders.blueprints.items[index]
+    (state: StoreState) => state.orderState.blueprint.items[index]
   );
 
   const productState: Products = useSelector(

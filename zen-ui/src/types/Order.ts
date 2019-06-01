@@ -17,10 +17,17 @@ export interface OrderItem {
 }
 
 export interface Orders {
-  blueprints: {
+  fetching: boolean;
+  failed: boolean;
+  orders: Order[];
+  blueprint: {
     active: number;
     prevActive?: number;
     items: Order[];
   };
-  receipts: Order[];
+  receipt: {
+    active: number;
+    prevActive?: number;
+    items: Order[];
+  };
 }

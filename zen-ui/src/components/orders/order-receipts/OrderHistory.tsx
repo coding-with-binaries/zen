@@ -1,45 +1,41 @@
-import React, { createRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTransition } from 'react-spring';
 import {
-  deleteOrderBlueprint,
-  selectOrderBlueprint
-} from '../../actions/order/Actions';
-import { fetchProducts } from '../../actions/product/Actions';
-import { StoreState } from '../../types';
-import { Order } from '../../types/Order';
-import OrderBlueprint, { Props as BlueprintProps } from './OrderBlueprint';
-import './Orders.css';
+  closeOrderReceipt,
+  fetchOrders,
+  selectOrderReceipt
+} from '../../../actions/order/receipts/Actions';
+import { StoreState } from '../../../types';
+import { Order } from '../../../types/Order';
+import '../Orders.css';
+import OrderReceipt, { Props as ReceiptProps } from './OrderReceipt';
 
-const Orders: React.FC = () => {
+const OrderHistory: React.FC = () => {
   const active: number = useSelector(
-    (state: StoreState) => state.orders.blueprints.active
+    (state: StoreState) => state.orderState.receipt.active
   );
 
   const prevActive: number | undefined = useSelector(
-    (state: StoreState) => state.orders.blueprints.prevActive
+    (state: StoreState) => state.orderState.receipt.prevActive
   );
 
   const isNext = prevActive && prevActive > active;
 
-  const blueprintRef = createRef<any>();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
+
   const onTabClick = (index: number) => () => {
-    if (blueprintRef.current) {
-      blueprintRef.current.saveOrderBlueprint();
-    }
-    dispatch(selectOrderBlueprint(index));
+    dispatch(selectOrderReceipt(index));
   };
 
   const onCloseTab = (index: number) => () => {
-    dispatch(deleteOrderBlueprint(index));
+    dispatch(closeOrderReceipt(index));
   };
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   const transitions = useTransition(active, p => p, {
     from:
@@ -57,19 +53,12 @@ const Orders: React.FC = () => {
   });
 
   const orders: Order[] = useSelector(
-    (state: StoreState) => state.orders.blueprints.items
+    (state: StoreState) => state.orderState.receipt.items
   );
 
-  const blueprints = orders.map(
-    o => ({ style, index, client }: BlueprintProps) => (
-      <OrderBlueprint
-        style={style}
-        index={index}
-        client={client}
-        ref={blueprintRef}
-      />
-    )
-  );
+  const receipts = orders.map(o => ({ style, index }: ReceiptProps) => (
+    <OrderReceipt style={style} index={index} />
+  ));
 
   return (
     <div className="zen-orders">
@@ -93,17 +82,8 @@ const Orders: React.FC = () => {
       {orders && orders.length > 0 && (
         <div className="zen-order-contents">
           {transitions.map(({ item, props, key }) => {
-            const Blueprint = blueprints[item];
-            return (
-              Blueprint && (
-                <Blueprint
-                  key={key}
-                  style={props}
-                  client={orders[item].client}
-                  index={item}
-                />
-              )
-            );
+            const Receipt = receipts[item];
+            return Receipt && <Receipt key={key} style={props} index={item} />;
           })}
         </div>
       )}
@@ -111,4 +91,4 @@ const Orders: React.FC = () => {
   );
 };
 
-export default Orders;
+export default OrderHistory;

@@ -7,6 +7,6 @@ export interface StoreState {
   navDrawer: boolean;
   auth: Auth;
   clientState: Clients;
-  orders: Orders;
+  orderState: Orders;
   productState: Products;
 }

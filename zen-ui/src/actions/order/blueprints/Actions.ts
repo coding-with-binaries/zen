@@ -1,5 +1,5 @@
-import { Client } from '../../types/Client';
-import { Order } from '../../types/Order';
+import { Client } from '../../../types/Client';
+import { Order } from '../../../types/Order';
 import * as Actions from './ActionConstants';
 import {
   AddOrderBlueprint,
@@ -43,6 +43,7 @@ export const submitOrderFailed = (): SubmitOrderFailed => ({
   type: Actions.SUBMIT_ORDER_FAILED
 });
 
-export const submitOrderSuccess = (): SubmitOrderSuccess => ({
-  type: Actions.SUBMIT_ORDER_SUCCESS
+export const submitOrderSuccess = (order: Order): SubmitOrderSuccess => ({
+  type: Actions.SUBMIT_ORDER_SUCCESS,
+  payload: { order }
 });

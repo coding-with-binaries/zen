@@ -20,14 +20,26 @@ const Clients: React.FC<Props> = props => {
     <div className="zen-clients">
       {clients.map((c, i) => (
         <div key={c.zenId} className="zen-client" onClick={onClientClick(i)}>
-          <div className="primary">
-            <div className="name">{c.firstName + ' ' + c.lastName}</div>
-            <div className="gender">{c.gender}</div>
-            <div className="phone">{c.phoneNumber}</div>
+          <span className="client-name">{`${c.firstName} ${c.lastName}`}</span>
+          <div className="client-social">
+            <span className="client-email">
+              <strong>Email: </strong>
+              {c.email}
+            </span>
+            <span className="client-phone">
+              <strong>Phone: </strong>
+              {c.phoneNumber}
+            </span>
           </div>
-          <div className="secondary">
-            <div className="dob">{c.dateOfBirth}</div>
-            <div className="email">{c.email}</div>
+          <div className="client-details">
+            <span className="client-dob">
+              <strong>Date of Birth: </strong>
+              {new Date(c.dateOfBirth).toLocaleDateString()}
+            </span>
+            <span className="client-gender">
+              <strong>Gender: </strong>
+              {c.gender}
+            </span>
           </div>
         </div>
       ))}

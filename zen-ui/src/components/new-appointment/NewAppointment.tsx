@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addOrderBlueprint } from '../../actions/order/Actions';
+import { addOrderBlueprint } from '../../actions/order/blueprints/Actions';
 import { searchClient } from '../../api/Client';
 import { Client } from '../../types/Client';
 import Clients from '../common/clients';

@@ -1,4 +1,4 @@
-.zen-client {
+.zen-order {
   display: grid;
   grid-template-rows: 20px 20px 20px;
   padding: 8px;
@@ -6,27 +6,25 @@
   border-bottom: 1px solid #c1dbc1;
 }
 
-.zen-client:hover {
+.zen-order:hover {
   background-color: #beeebe;
 }
 
-.zen-client .client-name {
+.zen-order .order-id {
   font-size: 14px;
   font-weight: 600;
 }
 
-.zen-client .client-social {
+.zen-order .order-client {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
   font-weight: 100;
-  white-space: nowrap;
 }
 
-.zen-client .client-details {
+.zen-order .order-dates {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
   font-weight: 100;
-  text-transform: capitalize;
 }

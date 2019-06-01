@@ -6,7 +6,7 @@ import { AuthenticateEmployeeSuccess } from '../actions/auth/ActionTypes';
 import { TOGGLE_NAV_DRAWER, ToggleNavDrawer } from '../actions/NavDrawer';
 import auth from './Auth';
 import clientState from './Client';
-import orders from './Order';
+import orderState from './Order';
 import productState from './Product';
 
 const navDrawerReducer = (
@@ -29,7 +29,7 @@ const rootReducer = (history: History) =>
     navDrawer: navDrawerReducer,
     clientState,
     auth,
-    orders,
+    orderState,
     productState
   });
 

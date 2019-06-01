@@ -1,0 +1,112 @@
+.zen-order-receipt {
+  background-color: #fafafa;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.receipt-invoice-wrapper {
+  width: 100%;
+  height: 100%;
+  grid-column: 2 / 3;
+  overflow: auto;
+}
+
+.receipt-invoice {
+  background-color: white;
+  margin: 32px 12px;
+  padding: 80px 48px;
+  min-height: 1000px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.invoice-dates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.invoice-receipt-date,
+.invoice-appointment-date {
+  font-size: 12px;
+  font-weight: 100;
+  margin: 8px 0;
+}
+
+.invoice-logo {
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #263238;
+}
+
+.invoice-logo-image {
+  width: 100%;
+  height: 100%;
+}
+
+.invoice-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20px 20px 20px;
+  font-size: 12px;
+  font-weight: 100;
+  margin: 16px 0;
+}
+
+.invoice-details .right-aligned {
+  text-align: end;
+}
+
+.invoice-products {
+  width: 100%;
+  margin-top: 40px;
+  border-collapse: collapse;
+}
+
+.invoice-products-header {
+  background: #efefef;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.invoice-products-header tr {
+  height: 36px;
+}
+
+.invoice-products th {
+  width: 8%;
+}
+
+.invoice-products th.description {
+  width: 60%;
+}
+
+.invoice-product {
+  height: 40px;
+  font-size: 12px;
+  font-weight: 100;
+  text-align: center;
+}
+
+.order-total {
+  height: 60px;
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: bolder;
+}
