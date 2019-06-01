@@ -35,6 +35,7 @@ export interface SubmitOrder {
   type: Actions.SUBMIT_ORDER;
   payload: {
     order: Order;
+    index: number;
   };
 }
 

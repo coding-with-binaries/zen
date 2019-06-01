@@ -11,8 +11,9 @@ import javax.persistence.Table;
 @Table(name = "products")
 @Entity
 public class Product {
+
 	public enum ProductType {
-		hair, dental, spa
+		hair, dental, spa, undefined
 	}
 
 	public enum Source {
@@ -32,6 +33,18 @@ public class Product {
 
 	@Enumerated(EnumType.STRING)
 	private Source source;
+
+	public Product() {
+
+	}
+
+	public Product(String description, double price, ProductType productType, Source source) {
+		super();
+		this.description = description;
+		this.price = price;
+		this.productType = productType;
+		this.source = source;
+	}
 
 	public int getZenId() {
 		return zenId;
@@ -71,5 +84,17 @@ public class Product {
 
 	public void setSource(Source source) {
 		this.source = source;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("{");
+		sb.append("zenId:").append(zenId);
+		sb.append(", description:'").append(description).append('\'');
+		sb.append(", price:").append(price);
+		sb.append(", productType:'").append(productType).append('\'');
+		sb.append(", source:'").append(source).append('\'');
+		sb.append('}');
+		return sb.toString();
 	}
 }

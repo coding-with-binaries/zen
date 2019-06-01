@@ -134,7 +134,11 @@ export const ZenSearch: React.FC<ZenSearchProps> = props => {
     setFocused(false);
   };
   return (
-    <div className="zen-search" onFocus={() => setFocused(true)}>
+    <div
+      className="zen-search"
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
       <ZenField {...fieldProps} />
       {visible && focused && (
         <div className="zen-dropdown">

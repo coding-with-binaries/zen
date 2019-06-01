@@ -110,4 +110,18 @@ public class Client {
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("{");
+		sb.append("zenId:").append(zenId);
+		sb.append(", firstName:'").append(firstName).append('\'');
+		sb.append(", lastName:'").append(lastName).append('\'');
+		sb.append(", phoneNumber:'").append(phoneNumber).append('\'');
+		sb.append(", email:'").append(email).append('\'');
+		sb.append(", dateOfBirth:'").append(dateOfBirth).append('\'');
+		sb.append(", gender:'").append(gender).append('\'');
+		sb.append('}');
+		return sb.toString();
+	}
 }

@@ -1,6 +1,5 @@
 package com.zen.zenserver.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,13 +20,15 @@ public class OrderItem {
 
 	private int quantity;
 
-	@JsonBackReference
+	private float discount;
+
+	@JsonBackReference(value = "order_ref")
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(referencedColumnName = "zenId")
+	@ManyToOne
+	@JoinColumn(name = "product_id", referencedColumnName = "zenId")
 	private Product product;
 
 	public int getZenId() {
@@ -46,6 +47,14 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
+	public float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+
 	public Order getOrder() {
 		return order;
 	}
@@ -60,5 +69,16 @@ public class OrderItem {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("{");
+		sb.append("zenId:").append(zenId);
+		sb.append(", quantity:").append(quantity);
+		sb.append(", discount:").append(discount);
+		sb.append(", product:").append(product);
+		sb.append('}');
+		return sb.toString();
 	}
 }

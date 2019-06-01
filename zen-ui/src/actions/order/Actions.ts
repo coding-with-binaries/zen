@@ -34,9 +34,9 @@ export const saveOrderBlueprint = (
   payload: { index, blueprint }
 });
 
-export const submitOrder = (order: Order): SubmitOrder => ({
+export const submitOrder = (order: Order, index: number): SubmitOrder => ({
   type: Actions.SUBMIT_ORDER,
-  payload: { order }
+  payload: { order, index }
 });
 
 export const submitOrderFailed = (): SubmitOrderFailed => ({

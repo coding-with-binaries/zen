@@ -57,7 +57,7 @@ const OrderBlueprint: React.FC<Props> = (props, ref) => {
   const initialOrderItem: OrderItem = {
     discount: 0,
     quantity: 0,
-    product: { description: '', price: 0, productType: '' }
+    product: { description: '', price: 0, productType: 'undefined' }
   };
 
   const initialValues: OrderBlueprintValues = {
@@ -101,7 +101,7 @@ const OrderBlueprint: React.FC<Props> = (props, ref) => {
       orderItems: values.orderItems,
       total
     };
-    dispatch(submitOrder(order));
+    dispatch(submitOrder(order, index));
   };
 
   const removeOrderItem = (i: number) => () => {

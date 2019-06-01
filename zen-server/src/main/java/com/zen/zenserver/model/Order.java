@@ -28,15 +28,13 @@ public class Order {
 
 	private Date appointmentDate;
 
-	private float discount;
-
 	private double total;
 
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "order_ref")
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
 
@@ -64,14 +62,6 @@ public class Order {
 		this.appointmentDate = appointmentDate;
 	}
 
-	public float getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(float discount) {
-		this.discount = discount;
-	}
-
 	public double getTotal() {
 		return total;
 	}
@@ -94,5 +84,17 @@ public class Order {
 
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("{");
+		sb.append("zenId:").append(zenId);
+		sb.append(", orderDate:").append(orderDate);
+		sb.append(", appointmentDate:").append(appointmentDate);
+		sb.append(", total:").append(total);
+		sb.append(", client:").append(client);
+		sb.append('}');
+		return sb.toString();
 	}
 }
