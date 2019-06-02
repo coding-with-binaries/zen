@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, FieldProps } from 'formik';
 import React, { useState } from 'react';
+import { debounce } from '../../../utils/Helpers';
 import './CustomInputs.css';
 
 type ZenInputProps = {
@@ -133,11 +134,13 @@ export const ZenSearch: React.FC<ZenSearchProps> = props => {
     onItemClick(id);
     setFocused(false);
   };
+
+  const debouncedBlur = debounce(() => setFocused(false), 500);
   return (
     <div
       className="zen-search"
       onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onBlur={debouncedBlur}
     >
       <ZenField {...fieldProps} />
       {visible && focused && (
