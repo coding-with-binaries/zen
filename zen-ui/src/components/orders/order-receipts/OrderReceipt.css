@@ -110,3 +110,29 @@
   font-size: 16px;
   font-weight: bolder;
 }
+
+.receipt-invoice .print-receipt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  width: 120px;
+  height: 44px;
+  margin: 8px 0;
+}
+
+.receipt-invoice .print-receipt {
+  background-color: white;
+  border: 2px solid #39983d;
+  color: #39983d;
+}
+
+.receipt-invoice .print-receipt:hover {
+  background-color: #ccf0ce;
+}
+
+.print {
+  padding: 48px 36px;
+}
