@@ -40,6 +40,17 @@ export const addClient = async (client: Client): Promise<Client> => {
   }
 };
 
+export const editClient = async (client: Client): Promise<Client> => {
+  try {
+    const response = await axios.put<Client>(CLIENTS_URL, client, {
+      headers: headers()
+    });
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export const searchClient = async (pattern: string): Promise<Client[]> => {
   try {
     const response = await axios.get<Client[]>(SEARCH_CLIENT_URL(pattern), {

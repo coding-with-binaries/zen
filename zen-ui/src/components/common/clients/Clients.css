@@ -1,13 +1,18 @@
-.zen-client {
+.zen-client-wrapper {
   display: grid;
-  grid-template-rows: 20px 20px 20px;
-  padding: 8px;
-  cursor: pointer;
+  grid-template-columns: auto 36px;
   border-bottom: 1px solid #c1dbc1;
 }
 
+.zen-client {
+  display: grid;
+  grid-template-rows: 20px 20px 20px;
+  cursor: pointer;
+  padding: 12px;
+}
+
 .zen-client:hover {
-  background-color: #beeebe;
+  background-color: #def1de;
 }
 
 .zen-client .client-name {
@@ -29,4 +34,20 @@
   font-size: 11px;
   font-weight: 100;
   text-transform: capitalize;
+}
+
+.zen-client-wrapper .client-edit {
+  height: 24px;
+  width: 24px;
+  border-radius: 12px;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zen-client-wrapper .client-edit:hover {
+  background-color: #def1de;
+  cursor: pointer;
 }
