@@ -12,6 +12,8 @@ const initialState: StoreState = {
   clientState: {
     fetching: true,
     failed: false,
+    submitting: false,
+    submitFailed: false,
     clients: []
   },
   orderState: {

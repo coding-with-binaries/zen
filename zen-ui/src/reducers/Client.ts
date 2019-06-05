@@ -22,6 +22,27 @@ const clientReducer = (
         draft.fetching = false;
         draft.clients = action.payload.clients;
         break;
+      case Actions.ADD_CLIENT:
+      case Actions.EDIT_CLIENT:
+        draft.submitting = true;
+        draft.submitFailed = false;
+        break;
+      case Actions.ADD_CLIENT_FAILED:
+      case Actions.EDIT_CLIENT_FAILED:
+        draft.submitting = false;
+        draft.submitFailed = true;
+        break;
+      case Actions.ADD_CLIENT_SUCCESS:
+        draft.submitting = false;
+        draft.clients.push(action.payload.client);
+        break;
+      case Actions.EDIT_CLIENT_SUCCESS:
+        const index = state.clients.findIndex(
+          c => c.email === action.payload.client.email
+        );
+        draft.submitting = false;
+        draft.clients[index] = action.payload.client;
+        break;
       // no default
     }
   });

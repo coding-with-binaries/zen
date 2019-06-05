@@ -1,13 +1,13 @@
 import { FormikActions } from 'formik';
-import React, { useState } from 'react';
-import { addClient } from '../../api/Client';
-import { Client } from '../../types/Client';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addClient } from '../../actions/client/Actions';
+import { StoreState } from '../../types';
+import { Client, Clients } from '../../types/Client';
 import ClientForm from '../common/client-form';
 import './NewClient.css';
 
 const NewClient: React.FC = () => {
-  const [status, setStatus] = useState({ submitting: false, failed: false });
-
   const initialClient = {
     email: '',
     firstName: '',
@@ -17,16 +17,23 @@ const NewClient: React.FC = () => {
     phoneNumber: ''
   };
 
+  const dispatch = useDispatch();
+  const { submitting, submitFailed }: Clients = useSelector(
+    (state: StoreState) => state.clientState
+  );
+
+  const actionsRef = useRef<FormikActions<Client>>();
+  useEffect(() => {
+    if (!submitting) {
+      if (actionsRef.current) {
+        actionsRef.current.resetForm();
+      }
+    }
+  }, [submitting]);
+
   const submitClientData = (values: Client, actions: FormikActions<Client>) => {
-    setStatus({ submitting: true, failed: false });
-    addClient(values)
-      .then(res => {
-        setStatus({ submitting: false, failed: false });
-        actions.resetForm();
-      })
-      .catch(err => {
-        setStatus({ submitting: false, failed: true });
-      });
+    dispatch(addClient(values));
+    actionsRef.current = actions;
   };
 
   return (
@@ -37,9 +44,9 @@ const NewClient: React.FC = () => {
       <div className="zen-new-client">
         <ClientForm
           initialValues={initialClient}
-          submitting={status.submitting}
-          failed={status.failed}
           resetable={true}
+          submitting={submitting}
+          failed={submitFailed}
           onSubmit={submitClientData}
         />
       </div>

@@ -16,7 +16,49 @@ export interface FetchClientsSuccess {
   };
 }
 
+export interface AddClient {
+  type: Actions.ADD_CLIENT;
+  payload: {
+    client: Client;
+  };
+}
+
+export interface AddClientFailed {
+  type: Actions.ADD_CLIENT_FAILED;
+}
+
+export interface AddClientSuccess {
+  type: Actions.ADD_CLIENT_SUCCESS;
+  payload: {
+    client: Client;
+  };
+}
+
+export interface EditClient {
+  type: Actions.EDIT_CLIENT;
+  payload: {
+    client: Client;
+  };
+}
+
+export interface EditClientFailed {
+  type: Actions.EDIT_CLIENT_FAILED;
+}
+
+export interface EditClientSuccess {
+  type: Actions.EDIT_CLIENT_SUCCESS;
+  payload: {
+    client: Client;
+  };
+}
+
 export type ClientAction =
   | FetchClients
   | FetchClientsFailed
-  | FetchClientsSuccess;
+  | FetchClientsSuccess
+  | AddClient
+  | AddClientFailed
+  | AddClientSuccess
+  | EditClient
+  | EditClientFailed
+  | EditClientSuccess;

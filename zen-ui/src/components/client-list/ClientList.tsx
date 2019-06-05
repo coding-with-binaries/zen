@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormikActions } from '../../../node_modules/formik';
-import { fetchClients } from '../../actions/client/Actions';
-import { editClient } from '../../api/Client';
+import { editClient, fetchClients } from '../../actions/client/Actions';
 import { StoreState } from '../../types';
 import { Client, Clients as ClientsType } from '../../types/Client';
 import ClientForm from '../common/client-form';
@@ -20,7 +19,6 @@ const ClientList: React.FC = () => {
 
   const [mode, setMode] = useState<Mode>('view');
   const [client, setClient] = useState<Client>();
-  const [status, setStatus] = useState({ submitting: false, failed: false });
 
   const dispatch = useDispatch();
 
@@ -33,17 +31,19 @@ const ClientList: React.FC = () => {
     setClient(c);
   };
 
+  const actionsRef = useRef<FormikActions<Client>>();
+  useEffect(() => {
+    if (!clientState.submitting) {
+      if (actionsRef.current) {
+        actionsRef.current.resetForm();
+      }
+      setMode('view');
+    }
+  }, [clientState.submitting]);
+
   const submitClientData = (values: Client, actions: FormikActions<Client>) => {
-    setStatus({ submitting: true, failed: false });
-    editClient(values)
-      .then(res => {
-        setStatus({ submitting: false, failed: false });
-        actions.resetForm();
-        setMode('view');
-      })
-      .catch(err => {
-        setStatus({ submitting: false, failed: true });
-      });
+    dispatch(editClient(values));
+    actionsRef.current = actions;
   };
 
   return (
@@ -78,9 +78,9 @@ const ClientList: React.FC = () => {
           <div className="zen-client-edit">
             <ClientForm
               initialValues={client}
-              submitting={status.submitting}
               cancelable={true}
-              failed={status.failed}
+              submitting={clientState.submitting}
+              failed={clientState.submitFailed}
               onCancel={() => setMode('view')}
               onSubmit={submitClientData}
             />

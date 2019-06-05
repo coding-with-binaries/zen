@@ -11,5 +11,7 @@ export interface Client {
 export interface Clients {
   fetching: boolean;
   failed: boolean;
+  submitting: boolean;
+  submitFailed: boolean;
   clients: Client[];
 }
