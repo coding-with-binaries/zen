@@ -18,8 +18,8 @@ const NewClient: React.FC = () => {
   };
 
   const dispatch = useDispatch();
-  const { submitting, submitFailed }: Clients = useSelector(
-    (state: StoreState) => state.clientState
+  const { submitting, submitFailed } = useSelector<StoreState, Clients>(
+    state => state.clientState
   );
 
   const actionsRef = useRef<FormikActions<Client>>();

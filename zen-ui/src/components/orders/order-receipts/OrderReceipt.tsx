@@ -14,8 +14,8 @@ export interface Props {
 const OrderReceipt: React.FC<Props> = props => {
   const { style, index } = props;
 
-  const receipt: Order = useSelector(
-    (state: StoreState) => state.orderState.receipt.items[index]
+  const receipt = useSelector<StoreState, Order>(
+    state => state.orderState.receipt.items[index]
   );
 
   const printRef = createRef<HTMLDivElement>();

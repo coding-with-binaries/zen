@@ -13,12 +13,12 @@ import '../Orders.css';
 import OrderReceipt, { Props as ReceiptProps } from './OrderReceipt';
 
 const OrderHistory: React.FC = () => {
-  const active: number = useSelector(
-    (state: StoreState) => state.orderState.receipt.active
+  const active = useSelector<StoreState, number>(
+    state => state.orderState.receipt.active
   );
 
-  const prevActive: number | undefined = useSelector(
-    (state: StoreState) => state.orderState.receipt.prevActive
+  const prevActive = useSelector<StoreState, number | undefined>(
+    state => state.orderState.receipt.prevActive
   );
 
   const isNext = prevActive && prevActive > active;
@@ -52,8 +52,8 @@ const OrderHistory: React.FC = () => {
     }
   });
 
-  const orders: Order[] = useSelector(
-    (state: StoreState) => state.orderState.receipt.items
+  const orders = useSelector<StoreState, Order[]>(
+    state => state.orderState.receipt.items
   );
 
   const receipts = orders.map(o => ({ style, index }: ReceiptProps) => (

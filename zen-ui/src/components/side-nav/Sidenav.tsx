@@ -23,9 +23,7 @@ const Sidenav: React.FC<Props> = props => {
     location: { pathname }
   } = props;
 
-  const navDrawer: boolean = useSelector(
-    (state: StoreState) => state.navDrawer
-  );
+  const navDrawer = useSelector<StoreState, boolean>(state => state.navDrawer);
 
   const dispatch = useDispatch();
   const toggleDrawer = useCallback(() => dispatch(toggleNavDrawer()), [

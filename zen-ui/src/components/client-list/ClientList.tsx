@@ -13,8 +13,8 @@ import './ClientList.css';
 type Mode = 'view' | 'edit';
 
 const ClientList: React.FC = () => {
-  const clientState: ClientsType = useSelector(
-    (state: StoreState) => state.clientState
+  const clientState = useSelector<StoreState, ClientsType>(
+    state => state.clientState
   );
 
   const [mode, setMode] = useState<Mode>('view');

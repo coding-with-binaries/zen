@@ -13,12 +13,12 @@ import '../Orders.css';
 import OrderBlueprint, { Props as BlueprintProps } from './OrderBlueprint';
 
 const OrderSchedules: React.FC = () => {
-  const active: number = useSelector(
-    (state: StoreState) => state.orderState.blueprint.active
+  const active = useSelector<StoreState, number>(
+    state => state.orderState.blueprint.active
   );
 
-  const prevActive: number | undefined = useSelector(
-    (state: StoreState) => state.orderState.blueprint.prevActive
+  const prevActive = useSelector<StoreState, number | undefined>(
+    state => state.orderState.blueprint.prevActive
   );
 
   const isNext = prevActive && prevActive > active;
@@ -56,8 +56,8 @@ const OrderSchedules: React.FC = () => {
     }
   });
 
-  const orders: Order[] = useSelector(
-    (state: StoreState) => state.orderState.blueprint.items
+  const orders = useSelector<StoreState, Order[]>(
+    state => state.orderState.blueprint.items
   );
 
   const blueprints = orders.map(

@@ -15,9 +15,7 @@ import Sidenav from '../side-nav';
 import './Home.css';
 
 const Home: React.FC = () => {
-  const navDrawer: boolean = useSelector(
-    (state: StoreState) => state.navDrawer
-  );
+  const navDrawer = useSelector<StoreState, boolean>(state => state.navDrawer);
   return (
     <div className="zen-home">
       <Sidenav />

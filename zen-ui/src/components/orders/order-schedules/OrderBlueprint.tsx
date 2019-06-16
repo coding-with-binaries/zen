@@ -34,12 +34,12 @@ interface OrderBlueprintValues {
 const OrderBlueprint: React.FC<Props> = (props, ref) => {
   const { style, index, client } = props;
 
-  const blueprint: Order = useSelector(
-    (state: StoreState) => state.orderState.blueprint.items[index]
+  const blueprint = useSelector<StoreState, Order>(
+    state => state.orderState.blueprint.items[index]
   );
 
-  const productState: Products = useSelector(
-    (state: StoreState) => state.productState
+  const productState = useSelector<StoreState, Products>(
+    state => state.productState
   );
 
   const [filteredProducts, setFilteredProducts] = useState(

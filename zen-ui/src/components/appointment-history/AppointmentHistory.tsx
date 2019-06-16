@@ -8,9 +8,7 @@ import Spinner from '../common/spinner';
 import './AppointmentHistory.css';
 
 const AppointmentHistory: React.FC = () => {
-  const orderState: Orders = useSelector(
-    (state: StoreState) => state.orderState
-  );
+  const orderState = useSelector<StoreState, Orders>(state => state.orderState);
   const dispatch = useDispatch();
 
   const onOrderClick = (order: Order) => () => {
