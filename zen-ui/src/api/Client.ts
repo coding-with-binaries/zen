@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { headers } from '../constants/ZenConstants';
 import { Client } from '../types/Client';
+import clients from '../mocks/Clients';
 
 const CLIENTS_URL = `/api/clients`;
 const GET_CLIENT_URL = (id: number) => `${CLIENTS_URL}/${id}`;
@@ -53,10 +54,13 @@ export const editClient = async (client: Client): Promise<Client> => {
 
 export const searchClient = async (pattern: string): Promise<Client[]> => {
   try {
-    const response = await axios.get<Client[]>(SEARCH_CLIENT_URL(pattern), {
-      headers: headers()
-    });
-    return response.data;
+    const filteredClients = clients.filter(
+      (c) =>
+        c.firstName.includes(pattern) ||
+        c.lastName.includes(pattern) ||
+        c.email.includes(pattern)
+    );
+    return Promise.resolve(filteredClients);
   } catch (error) {
     return Promise.reject(error);
   }

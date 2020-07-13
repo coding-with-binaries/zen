@@ -1,4 +1,5 @@
 import { StoreState } from '../types';
+import clients from '../mocks/Clients';
 
 const initialState: StoreState = {
   navDrawer: false,
@@ -14,7 +15,7 @@ const initialState: StoreState = {
     failed: false,
     submitting: false,
     submitFailed: false,
-    clients: []
+    clients
   },
   orderState: {
     fetching: true,

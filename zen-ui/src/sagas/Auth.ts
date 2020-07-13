@@ -29,12 +29,14 @@ function* watchForGetCurrentEmployee() {
 
 function* authenticateEmployeeSaga(action: AuthenticateEmployee) {
   try {
-    const authResponse: AuthResponse = yield call(
-      getAuthToken,
-      action.payload.authPayload
-    );
-    localStorage.setItem(ZEN_AUTH_TOKEN, authResponse.accessToken);
-    const authUser: AuthUser = yield call(getCurrentEmployee);
+    const { authPayload } = action.payload;
+    localStorage.setItem(ZEN_AUTH_TOKEN, 'zen-auth-token');
+    const authUser: AuthUser = {
+      zenId: 1,
+      email: authPayload.email,
+      firstName: 'Tony',
+      lastName: 'Stark'
+    };
     yield put(authenticateEmployeeSuccess(authUser));
     yield put(push('/'));
   } catch (error) {

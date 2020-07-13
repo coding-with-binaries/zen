@@ -6,12 +6,6 @@ import { ZEN_AUTH_TOKEN } from '../constants/ZenConstants';
 import Home from './home';
 
 const Main: React.FC = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCurrentEmployee());
-  }, [dispatch]);
-
   const authenticated = localStorage.getItem(ZEN_AUTH_TOKEN) !== null;
 
   if (!authenticated) {
