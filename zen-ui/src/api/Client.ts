@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { headers } from '../constants/ZenConstants';
-import { Client } from '../types/Client';
 import clients from '../mocks/Clients';
+import { Client } from '../types/Client';
 
 const CLIENTS_URL = `/api/clients`;
 const GET_CLIENT_URL = (id: number) => `${CLIENTS_URL}/${id}`;
@@ -10,10 +10,7 @@ const SEARCH_CLIENT_URL = (pattern: string) =>
 
 export const getAllClients = async (): Promise<Client[]> => {
   try {
-    const response = await axios.get<Client[]>(CLIENTS_URL, {
-      headers: headers()
-    });
-    return response.data;
+    return Promise.resolve(clients);
   } catch (error) {
     return Promise.reject(error);
   }

@@ -13,7 +13,7 @@ const clients: Client[] = [
   {
     zenId: 2,
     email: 'blackpanther@vmware.com',
-    firstName: "T'Challa",
+    firstName: `T'Challa`,
     gender: 'male',
     dateOfBirth: '01-01-1995',
     lastName: '',

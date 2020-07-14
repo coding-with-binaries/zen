@@ -1,5 +1,5 @@
-import { StoreState } from '../types';
 import clients from '../mocks/Clients';
+import { StoreState } from '../types';
 
 const initialState: StoreState = {
   navDrawer: false,
