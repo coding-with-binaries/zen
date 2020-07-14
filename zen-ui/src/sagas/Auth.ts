@@ -8,9 +8,9 @@ import {
   getCurrentEmployeeSuccess
 } from '../actions/auth/Actions';
 import { AuthenticateEmployee } from '../actions/auth/ActionTypes';
-import { getAuthToken, getCurrentEmployee } from '../api/Employee';
+import { getCurrentEmployee } from '../api/Employee';
 import { ZEN_AUTH_TOKEN } from '../constants/ZenConstants';
-import { AuthResponse, AuthUser } from '../types/Auth';
+import { AuthUser } from '../types/Auth';
 
 function* getCurrentEmployeeSaga() {
   try {
